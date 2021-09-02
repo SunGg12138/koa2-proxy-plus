@@ -6,10 +6,10 @@ const { expect } = require('chai');
 const bodyParser = require('koa-body');
 
 describe('koa2-proxy-plus test', function () {
-    it('modify query', function (done) {
-        const port = 58881;
+    it('modify query, add params', function (done) {
+        const port = 58880;
 
-        // 测试服务
+        // start test service
         const app_server = new Koa();
         app_server.use(async function (ctx) {
             expect(ctx.path).to.equal('/modify-query/query');
@@ -27,8 +27,6 @@ describe('koa2-proxy-plus test', function () {
                     target: `http://127.0.0.1:${port}/modify-query`,
                     query: {
                         modify: 'query'
-                    },
-                    onProxyReq () {
                     }
                 }
             }
@@ -46,10 +44,45 @@ describe('koa2-proxy-plus test', function () {
         });
     });
 
+    it('modify query, new params', function (done) {
+        const port = 58881;
+
+        // start test service
+        const app_server = new Koa();
+        app_server.use(async function (ctx) {
+            expect(ctx.path).to.equal('/modify-query/query');
+            expect(ctx.request.query).to.be.an('object');
+            expect(ctx.request.query.test).to.equal(undefined);
+            expect(ctx.request.query.modify).to.equal('query');
+            
+            ctx.body = { code: 0 };
+        });
+        app_server.listen(port);
+
+        const options = {
+            targets: {
+                '/query': {
+                    target: `http://127.0.0.1:${port}/modify-query`,
+                    query: {
+                        modify: 'query'
+                    }
+                }
+            }
+        };
+        const app_proxy = new Koa();
+        app_proxy.use(proxy(options));
+        supertest(app_proxy.callback())
+        .get('/query')
+        .end(function (err, res) {
+            expect(res.body.code).to.equal(0);
+            done();
+        });
+    });
+
     it('modify form body, add params', function (done) {
         const port = 58882;
 
-        // 测试服务
+        // start test service
         const app_server = new Koa();
         app_server.use(bodyParser());
         app_server.use(async function (ctx) {
@@ -68,8 +101,6 @@ describe('koa2-proxy-plus test', function () {
                     target: `http://127.0.0.1:${port}/modify-form`,
                     body: {
                         modify: 'form-body'
-                    },
-                    onProxyReq () {
                     }
                 }
             }
@@ -91,7 +122,7 @@ describe('koa2-proxy-plus test', function () {
     it('modify form body, new params', function (done) {
         const port = 58883;
 
-        // 测试服务
+        // start test service
         const app_server = new Koa();
         app_server.use(bodyParser());
         app_server.use(async function (ctx) {
@@ -110,8 +141,6 @@ describe('koa2-proxy-plus test', function () {
                     target: `http://127.0.0.1:${port}/modify-form`,
                     body: {
                         modify: 'form-body'
-                    },
-                    onProxyReq () {
                     }
                 }
             }
@@ -130,7 +159,7 @@ describe('koa2-proxy-plus test', function () {
     it('modify json body, add params', function (done) {
         const port = 58884;
 
-        // 测试服务
+        // start test service
         const app_server = new Koa();
         app_server.use(bodyParser());
         app_server.use(async function (ctx) {
@@ -170,7 +199,7 @@ describe('koa2-proxy-plus test', function () {
     it('modify json body, new params', function (done) {
         const port = 58885;
 
-        // 测试服务
+        // start test service
         const app_server = new Koa();
         app_server.use(bodyParser());
         app_server.use(async function (ctx) {
@@ -207,7 +236,7 @@ describe('koa2-proxy-plus test', function () {
     it('modify multipart body, add params', function (done) {
         const port = 58886;
 
-        // 测试服务
+        // start test service
         const app_server = new Koa();
         app_server.use(bodyParser({ multipart: true }));
         app_server.use(async function (ctx) {
@@ -249,7 +278,7 @@ describe('koa2-proxy-plus test', function () {
     it('modify multipart body, new params', function (done) {
         const port = 58887;
 
-        // 测试服务
+        // start test service
         const app_server = new Koa();
         app_server.use(bodyParser({ multipart: true }));
         app_server.use(async function (ctx) {

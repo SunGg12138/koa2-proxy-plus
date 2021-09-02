@@ -1,22 +1,27 @@
 {
   "name": "koa2-proxy-plus",
   "version": "1.0.0",
-  "description": "",
+  "description": "A koa2 proxy middleware, you can modify the middleware of query and body",
   "main": "index.js",
   "scripts": {
     "test": "mocha --timeout 999999 test/"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SunGg12138/koa2-proxy-plus.git"
+  },
+  "keywords": [ "koa2-proxy modify body", "koa2-proxy-plus", "http-proxy", "http-proxy-middleware", "koa2-proxy-middleware" ],
+  "author": "sungg12138",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SunGg12138/koa2-proxy-plus/issues"
+  },
+  "homepage": "https://github.com/SunGg12138/koa2-proxy-plus#readme",
   "dependencies": {
-    "content-type": "^1.0.4",
-    "get-stream": "^6.0.1",
+    "http-proxy-buffer": "^1.0.1",
     "http-proxy-middleware": "^0.18.0",
     "koa2-connect": "^1.0.2",
-    "path-to-regexp": "^2.2.1",
-    "stream-array": "^1.1.2",
-    "stream-concat": "^1.0.0"
+    "path-to-regexp": "^2.2.1"
   },
   "devDependencies": {
     "chai": "^4.3.4",
