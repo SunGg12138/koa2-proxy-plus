@@ -1,16 +1,16 @@
 interface ProxyOptions {
     targets: {
         [propname: string]: {
-            query: {
+            query?: {
                 [propname: string]: any
             },
-            body: {
+            body?: {
                 [propname: string]: any
             },
-            headers: {
+            headers?: {
                 [propname: string]: string | number
             },
-            buffer: Stream,
+            buffer?: Stream,
             
             [propname: string]: any
         }
@@ -18,5 +18,5 @@ interface ProxyOptions {
 }
 
 declare module 'koa2-proxy-plus' {
-    export default function (options: ProxyOptions): Function
+    export default function (options: ProxyOptions): Function<Promise>
 }

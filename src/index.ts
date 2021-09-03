@@ -4,7 +4,7 @@ import pathToRegexp from 'path-to-regexp';
 import proxyBuffer from 'http-proxy-buffer';
 
 export = function (options: ProxyOptions): Function {
-    return async function (ctx: KoaContext, next: Function): Promise<void> {
+    return async function (ctx: KoaContext, next: () => Promise<any>): Promise<void> {
         const { path } = ctx;
         const { targets = {} } = options;
 
