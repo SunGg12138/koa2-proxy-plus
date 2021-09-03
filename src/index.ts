@@ -1,10 +1,10 @@
-const k2c = require('koa2-connect');
-const httpProxy = require('http-proxy-middleware');
-const pathToRegexp = require('path-to-regexp');
-const proxyBuffer = require('http-proxy-buffer');
+import k2c from 'koa2-connect';
+import httpProxy from 'http-proxy-middleware';
+import pathToRegexp from 'path-to-regexp';
+import proxyBuffer from 'http-proxy-buffer';
 
-module.exports = (options) => {
-    return async function (ctx, next) {
+export = function (options: ProxyOptions): Function {
+    return async function (ctx: KoaContext, next: Function): Promise<void> {
         const { path } = ctx;
         const { targets = {} } = options;
 

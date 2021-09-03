@@ -18,7 +18,7 @@ This is a very simple usage. If you are familiar with the use of http-proxy-midd
 
 ```javascript
 const Koa = require('koa');
-const proxy = require('koa2-proxy-middleware');
+const proxy = require('koa2-proxy-plus');
  
 const app = new Koa();
  

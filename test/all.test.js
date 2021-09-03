@@ -1,7 +1,7 @@
 const fs = require('fs');
 const Koa = require('koa');
 const supertest = require('supertest');
-const proxy = require('../');
+const proxy = require('../dist/');
 const { expect } = require('chai');
 const bodyParser = require('koa-body');
 
