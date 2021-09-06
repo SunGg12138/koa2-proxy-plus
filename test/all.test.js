@@ -16,6 +16,7 @@ describe('koa2-proxy-plus test', function () {
             expect(ctx.request.query).to.be.an('object');
             expect(ctx.request.query.test).to.equal('modify query');
             expect(ctx.request.query.modify).to.equal('query');
+            expect(ctx.request.query.field_2).to.equal('query-2');
             
             ctx.body = { code: 0 };
         });
@@ -26,7 +27,14 @@ describe('koa2-proxy-plus test', function () {
                 '/query': {
                     target: `http://127.0.0.1:${port}/modify-query`,
                     query: {
-                        modify: 'query'
+                        modify: 'query',
+
+                        // the value is "query-2"
+                        field_2: function (req, target) {
+                            return new Promise(re => {
+                                re(target.query.modify + '-2');
+                            });
+                        },
                     }
                 }
             }

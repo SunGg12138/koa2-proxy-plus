@@ -33,7 +33,18 @@ const options = {
 
             // use body attribute, you can modify the body
             body: {
-                from: 'proxy-server',
+                field: 'proxy-server',
+
+                cookie: function (req, target) {
+                    return req.headers['cookie'];
+                },
+
+                // the value is "proxy-server-2"
+                field_2: function (req, target) {
+                    return new Promise(re => {
+                        re(target.body.field + '-2');
+                    });
+                },
             },
             changeOrigin: true,
         },

@@ -1,6 +1,6 @@
 {
   "name": "koa2-proxy-plus",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A koa2 proxy middleware, you can modify the middleware of query and body",
   "main": "dist/index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/SunGg12138/koa2-proxy-plus#readme",
   "dependencies": {
-    "http-proxy-buffer": "^1.0.6",
+    "http-proxy-buffer": "^1.1.0",
     "http-proxy-middleware": "^0.18.0",
     "koa2-connect": "^1.0.2",
     "path-to-regexp": "^2.2.1"
